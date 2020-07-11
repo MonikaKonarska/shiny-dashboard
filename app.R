@@ -5,7 +5,7 @@ library(ggplot2)
 library(scales)
 
 source(file.path(getwd(), "modules", "data_modules.R"))
-
+source(file.path(getwd(), "modules", "plot_modules.R"))
 
 ui <- dashboardPage(
   
@@ -26,8 +26,9 @@ ui <- dashboardPage(
               fluidRow(
                 filteringDatasetModuleUI("select_data"),
                 br(),
-                column(width = 7, plotOutput(outputId = "amount_rents_plot") %>% withSpinner(color="#0dc5c1"))
-              )
+                column(width = 7, plotOutput(outputId = "amount_rents_plot") %>% withSpinner(color = "#0dc5c1"))
+                ),
+              peakHoursModuleUI("peak_hours")
               )
       )
     )
@@ -36,6 +37,8 @@ ui <- dashboardPage(
 server <- function(input, output, session) {
   filtered_data  <- callModule(module = filteringDatasetModule, id = "select_data")
   callModule(module = infoBoxModuleServer , id = "infoboxes",  dataset = filtered_data)
+  callModule(module = peakHoursModuleServer, id = "peak_hours", dataset = filtered_data)
+  
   
   output$amount_rents_plot <- renderPlot({
     number_of_rentals_plot(dataset = filtered_data())
