@@ -47,8 +47,7 @@ if(file.exists(data_path)) {
     ) %>% setDT()
   
   dataDT <- dataDT[which(dataDT$month_rent_start != "February"), ]
+  dataDT <- dataDT[!rental_place %in% c("# Rowery skradzione Wrocław 2014", "#Rowery zapasowe Warszawa", ".GOTOWE DO REZERWACJI", ".RELOKACYJNA", ".RELOKACYJNA A1-4", ".SERWIS - ŁADOWANIE", "55555")]
   dataDT$rn <- seq.int(nrow(dataDT))
-  
   saveRDS(dataDT, file = data_path)
-  
 }
