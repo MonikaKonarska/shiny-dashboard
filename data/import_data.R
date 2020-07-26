@@ -8,6 +8,8 @@ data_path <- file.path(getwd(), "data", "dataDT.rds")
 
 if(file.exists(data_path)) {
   dataDT <- readRDS(file = data_path) 
+  districts <- read.csv(file.path(getwd(), "data", "district_Wroclaw.csv"), sep = ';')
+  stations <- read.csv(file.path(getwd(), "data", "station_coordinates.csv"), sep = ";")
 } else {
   id_stations <- read.csv(file.path(getwd(), "data", "id_stations.csv"), sep = ';', stringsAsFactors = FALSE)
   data201903 <- download_data_from_website(url = "https://www.wroclaw.pl/open-data/dataset/a646ce34-b24a-4f5c-8174-71dfc1bd2d0b/resource/30d9e087-bafd-441e-aa09-f20a11fc60f5/download/historia_przejazdow_2019-03.csv")
@@ -45,9 +47,24 @@ if(file.exists(data_path)) {
     ) %>% setDT()
   
   dataDT <- dataDT[which(dataDT$month_rent_start != "February"), ]
-  dataDT <- dataDT[!rental_place %in% c("# Rowery skradzione Wrocław 2014", "#Rowery zapasowe Warszawa", ".GOTOWE DO REZERWACJI", ".RELOKACYJNA", ".RELOKACYJNA A1-4", ".SERWIS - ŁADOWANIE", "55555", "Młynarska/Wąska", "NIOL test", "Fabryczna  (WSB)")]
   dataDT <- dataDT %>%
-    left_join(id_stations, by = c("rental_place" = "rental_place"))
+    filter(!str_trim(rental_place) %in% c("# Rowery skradzione Wrocław 2014", "#Rowery zapasowe Warszawa", ".GOTOWE DO REZERWACJI", ".RELOKACYJNA", ".RELOKACYJNA A1-4", ".SERWIS - ŁADOWANIE", "55555", "Młynarska/Wąska", "NIOL test", "Fabryczna  (WSB)")
+           ) 
+  dataDT$rental_place_id <- str_trim(dataDT$rental_place)
+  dataDT$return_place_id <- str_trim(dataDT$return_place)
+  id_stations$rental_place <- str_trim(id_stations$rental_place)
+
+  dataDT <- dataDT %>%
+    left_join(id_stations, by = c("rental_place_id" = "rental_place")) %>%
+    rename("id_station_rental" = "id_station") %>%
+    left_join(id_stations, by = c("return_place_id" = "rental_place")) %>%
+    rename("id_station_return" = "id_station")
+  
+  dataDT <-   dataDT %>%
+    filter(!is.na(id_station_rental))%>%
+    filter(!is.na(id_station_return))
+
   dataDT$rn <- seq.int(nrow(dataDT))
+  dataDT <- as.data.table(dataDT)
   saveRDS(dataDT, file = data_path)
 }
