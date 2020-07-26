@@ -9,6 +9,8 @@ Project Status:
 
 ![In Progress](helpers/app_in_progress/Screenshot_app.png)
 
+![](helpers/app_in_progress/Screenshot_maps.png)
+
 
 ## Project Intro/Objective
 
