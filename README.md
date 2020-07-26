@@ -13,7 +13,7 @@ Project Status:
 ## Project Intro/Objective
 
 The purpose of this project is to build the analytical dashboard in Shiny.
-The app presents information about the rental bike in Wrocław in 2019. I decided to use [modules](https://github.com/MonikaKonarska/shiny-dashboard/tree/master/modules) to manage the growing complexity of Shiny application code.
+The app presents information about the rental bikes in Wrocław in 2019. I decided to use the [modules](https://github.com/MonikaKonarska/shiny-dashboard/tree/master/modules) to manage the growing complexity of Shiny application code.
 
 
 ## Used 
