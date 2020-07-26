@@ -7,7 +7,7 @@ Project Status:
 - [ ] Completed
 
 
-![In Progress](https://github.com/MonikaKonarska/shiny-dashboard/tree/master/helpers/app%20in%20progress/Screenshot_app.png)
+![In Progress](helpers/app in progress/Screenshot_app.png)
 
 
 ## Project Intro/Objective
