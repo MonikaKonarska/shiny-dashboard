@@ -7,7 +7,7 @@ Project Status:
 - [ ] Completed
 
 
-![In Progress](master/helpers/app%20in%20progress/Screenshot_app.png)
+![](master/helpers/app%20in%20progress/Screenshot_app.png)
 
 
 ## Project Intro/Objective
