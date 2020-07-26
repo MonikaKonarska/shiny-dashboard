@@ -7,7 +7,7 @@ Project Status:
 - [ ] Completed
 
 
-
+![In Progress](https://github.com/MonikaKonarska/shiny-dashboard/tree/master/helpers/app%20in%20progress/Screenshot_app.png)
 
 
 ## Project Intro/Objective
@@ -37,4 +37,4 @@ The app presents information about the rental bike in Wrocław in 2019. I decide
 
 
 ### How to run ?
-You can start with the [`import_data.R`](https://github.com/MonikaKonarska/shiny-dashboard/blob/master/data/import_data.R) script and after run the [`app.R`](https://github.com/MonikaKonarska/shiny-dashboard/blob/master/app.R).
+You can start with the [`import_data.R`](https://github.com/MonikaKonarska/shiny-dashboard/blob/master/data/import_data.R) script and after that run the [`app.R`](https://github.com/MonikaKonarska/shiny-dashboard/blob/master/app.R).
